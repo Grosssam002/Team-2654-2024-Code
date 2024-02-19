@@ -22,6 +22,12 @@ public final class Constants {
     // Should be measured from one center of the wheel to the other.
     public static final double DRIVETRAIN_WHEELBASE_METERS = Units.inchesToMeters(24);
 
+    //To set the wheels straight set steer offset radians to zero, then go to smart dashboard and read the value for the corresponding wheel. 
+    //turn the wheel straight and convert the degrees from smart dashboard to radians using a radians calculator online. 
+    //Use that number and replace the zero you inputed with the new number. if its not right try changing the sign in front of the number
+    // or you can add a plus or minus Math.PI if it still doesn't work, it may take a couple of tries. try to do one wheel at a time, it will make it easier.
+    //If anything happens make sure the ID's are right for each motor and encoder, they are listed below for each module.
+    
     public static final int FRONT_LEFT_MODULE_DRIVE_MOTOR = 3;
     public static final int FRONT_LEFT_MODULE_STEER_MOTOR = 4;
     public static final int FRONT_LEFT_MODULE_STEER_ENCODER = 11;

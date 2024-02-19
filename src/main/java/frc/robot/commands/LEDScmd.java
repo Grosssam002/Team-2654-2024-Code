@@ -13,7 +13,11 @@ public class LEDScmd extends Command {
         addRequirements(m_Leds);
     }
     @Override
-    public void execute() {
+    public void initialize() {
         m_Leds.leds();
 }
+    @Override
+    public void end(boolean interrupted){
+        //m_Leds.closeleds();
+    }
 }

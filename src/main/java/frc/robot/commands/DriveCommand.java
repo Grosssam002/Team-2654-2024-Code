@@ -15,6 +15,7 @@ import frc.robot.subsystems.Pigeon;
 import edu.wpi.first.math.MathUtil;
 import java.lang.Math;
 
+
 public class DriveCommand extends Command {
     protected final DrivetrainSubsystem drivetrain;
 
@@ -95,6 +96,10 @@ public class DriveCommand extends Command {
     @Override
     public void execute() {
         drivetrain.drive(getX(), -getY(), -getRotation(), fieldCentricSupplier.getAsBoolean());
+        
+        SmartDashboard.putNumber("nav rotation x", drivetrain.getPosition().getX());
+        SmartDashboard.putNumber("nav rotation y", drivetrain.getPosition().getY());
+        SmartDashboard.putNumber("nav rotation angle", spins.getangle());
     }
 
     @Override

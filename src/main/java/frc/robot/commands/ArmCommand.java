@@ -11,6 +11,8 @@ public class ArmCommand extends Command {
     private final boolean reset;
     private final DoubleSupplier m_PositionSupplier;
 
+    //declare variables in this. format and through subsystem here.
+
     public ArmCommand(
         ArmSubsystem c_Armsub,
         DoubleSupplier c_PostionSupplier,
@@ -19,8 +21,7 @@ public class ArmCommand extends Command {
         boolean reset
     )
      {
-        // Use addRequirements() here to declare subsystem dependencies.
-        //addRequirements(m_ExampleSensor);
+    
         this.m_ArmSubsystem = c_Armsub;
         this.pos = pos;
         this.speed = speed;
@@ -29,7 +30,7 @@ public class ArmCommand extends Command {
         addRequirements(m_ArmSubsystem);
      }
 
-
+//Sets zero when robot starts.
 @Override
 public void initialize(){
   if(reset == true){
@@ -37,6 +38,7 @@ public void initialize(){
   }
   
 }
+//Arm movement command.
 @Override
   public void execute() {
     SmartDashboard.putNumber("truepos", m_ArmSubsystem.getPos());

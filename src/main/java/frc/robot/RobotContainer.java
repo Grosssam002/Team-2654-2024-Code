@@ -62,7 +62,7 @@ public class RobotContainer {
     m_LimelightSub.setDefaultCommand(new LimeLightCmd(m_LimelightSub));
     //m_ArmSubsystem.setDefaultCommand(new ArmCommand(m_ArmSubsystem, null, -60, 0.2, fieldCentric));
     m_ArmSubsystem.setDefaultCommand(new ManuelArmCommand2(m_ArmSubsystem, 0.2));
-    //m_Leds.setDefaultCommand(new LEDScmd(m_Leds));
+    m_Leds.setDefaultCommand(new LEDScmd(m_Leds));
     //Drive Commands
     driveJoystick = new Joystick(0);
     //steerJoystick = new Joystick(1);
@@ -101,16 +101,16 @@ public class RobotContainer {
     
     //ButtonPad
 
-    c_driverController.button(1).whileTrue(new MotorCommand(m_ExampleMotor,0.5,true ));//1 Note Movement sensor
+    c_driverController.button(1).whileTrue(new MotorCommand(m_ExampleMotor,0.35,true ));//1 Note Movement sensor
     c_driverController.button(2).whileTrue(new MotorCommand(m_ExampleMotor, 1,false));//2 Note movemnet no sensor
     c_driverController.button(3).whileTrue(new ShooterCommand(m_ShooterSubsystem,-0.75));//3 Launch into Speaker
     c_driverController.button(4).whileTrue(new ShooterCommand(m_ShooterSubsystem,-0.075));//4 Launch into Amp
     c_driverController.button(5).whileTrue(new MotorCommand(m_ExampleMotor,-0.5,false ));//5 Move Note Backwards
-     c_driverController.button(6).whileTrue(new MotorCommand(m_ExampleMotor,-1,false ));
+     c_driverController.button(6).whileTrue(new MotorCommand(m_ExampleMotor,-0.3,false ));
     //Xbox Controller
     m_driverController.button(2).whileTrue(new ManuelArmCmd(m_ArmSubsystem, 0.35));
     m_driverController.button(1).whileTrue(new ManuelArmCmd(m_ArmSubsystem, -0.25));
-    m_driverController.button(3).whileTrue(new ArmCommand(m_ArmSubsystem, null,7, 0.3,false));//3 Arm to Amp Launch Position
+    //m_driverController.button(3).whileTrue(new ArmCommand(m_ArmSubsystem, null,7, 0.3,false));//3 Arm to Amp Launch Position
     //m_driverController.button(1).whileTrue(new ArmCommand(m_ArmSubsystem,null,-70.8, 0.2, false));//1 Arm to Floor
     //m_driverController.button(2).whileTrue(new ArmCommand(m_ArmSubsystem, null,-47, 0.3,false));//2 Arm to Speaker Launch Position
     
