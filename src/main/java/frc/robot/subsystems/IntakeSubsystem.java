@@ -12,7 +12,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 
 
 
-public class ExampleMotorSubsystem extends SubsystemBase {
+public class IntakeSubsystem extends SubsystemBase {
 private CANSparkMax motor1 = new CANSparkMax(24,MotorType.kBrushless);
 public void setmotor1(Double speed) {
     motor1.set(speed);

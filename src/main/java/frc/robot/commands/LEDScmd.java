@@ -14,10 +14,14 @@ public class LEDScmd extends Command {
     }
     @Override
     public void initialize() {
-        m_Leds.leds();
+        m_Leds.init_leds();
 }
     @Override
+    public void execute(){
+        m_Leds.leds();
+    }
+    @Override
     public void end(boolean interrupted){
-        //m_Leds.closeleds();
+        m_Leds.closeleds();
     }
 }

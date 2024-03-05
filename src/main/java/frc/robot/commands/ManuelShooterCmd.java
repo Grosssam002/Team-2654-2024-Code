@@ -6,10 +6,10 @@ import java.util.function.DoubleSupplier;
 
 public class ManuelShooterCmd extends Command {
     private final ShooterSubsystem m_ShooterSubsystem;
-    private DoubleSupplier m_speed1;
+    private Double m_speed1;
     public ManuelShooterCmd(
         ShooterSubsystem m_ShooterSubsystem,
-        DoubleSupplier m_speed1
+        Double m_speed1
 
 
     )
@@ -20,7 +20,7 @@ public class ManuelShooterCmd extends Command {
     }
     @Override
     public void execute() {
-        m_ShooterSubsystem.run(m_speed1.getAsDouble());
+        m_ShooterSubsystem.run(m_speed1);
 
     }
 }

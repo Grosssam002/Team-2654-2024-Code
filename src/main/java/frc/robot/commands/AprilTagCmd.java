@@ -32,6 +32,7 @@ public class AprilTagCmd extends Command {
    // set zero when robot starts 
 @Override
 public void initialize(){
+  m_LimelightSub.switchPipeline(0);
     if(reset == true){
         m_ArmSubsystem.setzero();
         }
@@ -50,41 +51,46 @@ public void initialize(){
     double Tid = SpeakerAprilTag[3];
     //Working auto aim, the negative number is the angle, the more negative the umber the lower it is to the ground, works to about 6-8 feet from front of speaker
     //about 75% accuracy. The Y variable is the distance from the tag do not change those.
-    if(Tid == 8){
+    if(Tid == 8 ||Tid == 4 || Tid == 7){
         SmartDashboard.putNumber("Manuel Motor",m_ArmSubsystem.getPos());
-        if(y >= 20){m_ArmSubsystem.drive_to_pos(-65,0.3);}
-        else if((y<20) && (y>=19)){m_ArmSubsystem.drive_to_pos(-64, 0.3);}
-        else if((y<19) && (y>=18)){m_ArmSubsystem.drive_to_pos(-63, 0.3);}
-        else if((y<18) && (y>=17)){m_ArmSubsystem.drive_to_pos(-62, 0.3);}
-        else if((y<17) && (y>=16)){m_ArmSubsystem.drive_to_pos(-61, 0.3);}
-        else if((y<16) && (y>=15)){m_ArmSubsystem.drive_to_pos(-60, 0.3);}
-        else if((y<15) && (y>=14)){m_ArmSubsystem.drive_to_pos(-59, 0.3);}
-        else if((y<14) && (y>=13)){m_ArmSubsystem.drive_to_pos(-58, 0.3);}
-        else if((y<13) && (y>=12)){m_ArmSubsystem.drive_to_pos(-57, 0.3);}
-        else if((y<12) && (y>=11)){m_ArmSubsystem.drive_to_pos(-56.2, 0.3);}
-        else if((y<11) && (y>=10)){m_ArmSubsystem.drive_to_pos(-55.5, 0.3);}
-        else if((y<10) && (y>=9)){m_ArmSubsystem.drive_to_pos(-55.3, 0.3);}
-        else if((y<9) && (y>=8)){m_ArmSubsystem.drive_to_pos(-54.9, 0.3);}
-        else if((y<8) && (y>=7)){m_ArmSubsystem.drive_to_pos(-54, 0.3);}
-        else if((y<7) && (y>=6)){m_ArmSubsystem.drive_to_pos(-53.3, 0.3);}
-        else if((y<6) && (y>=5)){m_ArmSubsystem.drive_to_pos(-53.3, 0.3);}
-        else if((y<5) && (y>=4)){m_ArmSubsystem.drive_to_pos(-53.1, 0.3);}
-        else if((y<4) && (y>=3)){m_ArmSubsystem.drive_to_pos(-52.6, 0.3);}
-        else if((y<3) && (y>=2)){m_ArmSubsystem.drive_to_pos(-51.8, 0.3);}
-        else if((y<2) && (y>=1)){m_ArmSubsystem.drive_to_pos(-50.7, 0.3);}
-        else if((y<1) && (y>=0)){m_ArmSubsystem.drive_to_pos(-49, 0.3);}
-        else {m_ArmSubsystem.drive_to_pos(-47.8, 0.3);}
+        if(y >= 20){m_ArmSubsystem.drive_to_pos(60,0.3);}
+        else if((y<20) && (y>=19)){m_ArmSubsystem.drive_to_pos(59, 0.3);}
+        else if((y<19) && (y>=18)){m_ArmSubsystem.drive_to_pos(57.7, 0.3);}
+        else if((y<18) && (y>=17)){m_ArmSubsystem.drive_to_pos(57, 0.3);}
+        else if((y<17) && (y>=16)){m_ArmSubsystem.drive_to_pos(56.2, 0.3);}
+        else if((y<16) && (y>=15)){m_ArmSubsystem.drive_to_pos(55, 0.3);}
+        else if((y<15) && (y>=14)){m_ArmSubsystem.drive_to_pos(54, 0.3);}
+        else if((y<14) && (y>=13)){m_ArmSubsystem.drive_to_pos(53, 0.3);}
+        else if((y<13) && (y>=12)){m_ArmSubsystem.drive_to_pos(52, 0.3);}
+        else if((y<12) && (y>=11)){m_ArmSubsystem.drive_to_pos(51, 0.3);}
+        else if((y<11) && (y>=10)){m_ArmSubsystem.drive_to_pos(50, 0.3);}
+        else if((y<10) && (y>=9)){m_ArmSubsystem.drive_to_pos(49, 0.3);}
+        else if((y<9) && (y>=8)){m_ArmSubsystem.drive_to_pos(48, 0.3);}
+        else if((y<8) && (y>=7)){m_ArmSubsystem.drive_to_pos(47.1, 0.3);}
+        else if((y<7) && (y>=6)){m_ArmSubsystem.drive_to_pos(46, 0.3);}
+        else if((y<6) && (y>=5)){m_ArmSubsystem.drive_to_pos(45.1, 0.3);}
+        else if((y<5) && (y>=4)){m_ArmSubsystem.drive_to_pos(44.2, 0.3);}
+        else if((y<4) && (y>=3)){m_ArmSubsystem.drive_to_pos(43.2, 0.3);}
+        else if((y<3) && (y>=2)){m_ArmSubsystem.drive_to_pos(42.4, 0.3);}
+        else if((y<2) && (y>=1)){m_ArmSubsystem.drive_to_pos(41.5, 0.3);}
+        else if((y<1) && (y>=0)){m_ArmSubsystem.drive_to_pos(40.6, 0.3);}
+        else if((y<0) && (y>=-1)){m_ArmSubsystem.drive_to_pos(40, 0.3);}
+        else if((y<-1) && (y>=-2)){m_ArmSubsystem.drive_to_pos(39.5, 0.3);}
+        else if((y<-2) && (y>=-3)){m_ArmSubsystem.drive_to_pos(38.8, 0.3);}
+        else if((y<-3) && (y>=-4)){m_ArmSubsystem.drive_to_pos(38.3, 0.3);}
+        else if((y<-4) && (y>=-5)){m_ArmSubsystem.drive_to_pos(37.6, 0.3);}
+        else {m_ArmSubsystem.drive_to_pos(37, 0.3);}
     }
     else{ 
-        //double current_pos = m_ArmSubsystem.getPos();
-        //if (current_pos < 5 && speed>0){
-        //    m_ArmSubsystem.p2(speed);
-        //    
-        //} else if(current_pos > -46 && speed<0){
-        //m_ArmSubsystem.p2(speed);
-        //}
-        //else {m_ArmSubsystem.drive_to_pos(SmartDashboard.getNumber("Manuel Motor",-60)*1.4976, speed);}
-        m_ArmSubsystem.drive_to_pos(SmartDashboard.getNumber("Manuel Motor",-60)*1.4976, speed);
+        double current_pos = m_ArmSubsystem.getPos();
+        if (current_pos < -10 && speed>0){
+            m_ArmSubsystem.p2(speed);
+            
+        } else if(current_pos > 43.2 && speed<0){
+        m_ArmSubsystem.p2(speed);
+        }
+        else {m_ArmSubsystem.drive_to_pos(SmartDashboard.getNumber("Manuel Motor",-60)*1.4976, speed);}
+       
   }
   }
 }

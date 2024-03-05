@@ -2,17 +2,18 @@ package frc.robot.commands;
 
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.ExampleMotorSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+
 
 
 public class Sensorcommand extends Command {
-    private final ExampleMotorSubsystem m_ExampleSensor;
+    private final IntakeSubsystem m_ExampleSensor;
 //public ExampleCommand(ExampleSubsystem subsystem) {
     //m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     //addRequirements(subsystem);
     public Sensorcommand(
-        ExampleMotorSubsystem m_ExampleSensor
+        IntakeSubsystem m_ExampleSensor
     )
      {
         // Use addRequirements() here to declare subsystem dependencies.

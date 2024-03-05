@@ -14,6 +14,7 @@ NetworkTableEntry ty = table.getEntry("ty");
 NetworkTableEntry ta = table.getEntry("ta");
 NetworkTableEntry tid = table.getEntry("tid");
 
+
 //read values periodically
 double x = tx.getDouble(0.0);
 double y = ty.getDouble(0.0);
@@ -33,4 +34,10 @@ ans[2] = Area;
 ans[3] = Tid;
 return ans;
 }
+public void switchPipeline(double pipelinenum) {
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    table.getEntry("pipeline").setNumber(pipelinenum);
+    table.getEntry("ledMode").setNumber(0);
+}
+
 }
