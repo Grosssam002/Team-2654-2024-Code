@@ -24,17 +24,17 @@ public class HookMotorCmd extends Command{
     //m_HookMotorSubsystem.run(m_speed1);
     m_HookMotorSubsystem.getPos();
     double hook_pos1 = SmartDashboard.getNumber("Hook1 Degrees",0);
-    if (hook_pos1 <0 && hook_pos1 > -482){
+    if (hook_pos1 <=0 && hook_pos1 >= -482){
         m_HookMotorSubsystem.run1(m_speed1);
     }
-    else if (hook_pos1 >0 && hook_pos1 > -482){
+    else if (hook_pos1 >=0 && hook_pos1 >= -482){
         if (m_speed1 < 0){
         m_HookMotorSubsystem.run1(m_speed1);
         }
         else{m_HookMotorSubsystem.run1(0);
         }
     }
-    else if (hook_pos1 <0 && hook_pos1 < -482){
+    else if (hook_pos1 <=0 && hook_pos1 <= -482){
         if (m_speed1 > 0){
         m_HookMotorSubsystem.run1(m_speed1);
         }
@@ -43,17 +43,17 @@ public class HookMotorCmd extends Command{
     }
     else{m_HookMotorSubsystem.run1(0);}
      double hook_pos2 = SmartDashboard.getNumber("Hook2 Degrees",0);
-    if (hook_pos2 <0 && hook_pos2 > -482){
+    if (hook_pos2 <=0 && hook_pos2 >= -482){
         m_HookMotorSubsystem.run2(m_speed1);
     }
-    else if (hook_pos2 >0 && hook_pos2 > -482){
+    else if (hook_pos2 >=0 && hook_pos2 >= -482){
         if (m_speed1 < 0){
         m_HookMotorSubsystem.run2(m_speed1);
         }
         else{m_HookMotorSubsystem.run2(0);
         }
        }
-       else if (hook_pos2 <0 && hook_pos2 < -482){
+       else if (hook_pos2 <=0 && hook_pos2 <= -482){
            if (m_speed1 > 0){
            m_HookMotorSubsystem.run2(m_speed1);
            }

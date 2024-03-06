@@ -16,6 +16,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.LimelightSub;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.subsystems.Limelight2Sub;
 
 import java.util.function.BooleanSupplier;
 
@@ -30,10 +31,12 @@ public final class Autos {
       //new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, -3, 3, 0, 0.5, 0.1, 0.1, 0.1, spins)),
       //new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 4, -4, 0, 0.5, 0.1, 0.1, 0.1, spins)),
       //new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 3, 3, 0, 0.5, 0.1, 0.1, 0.1, spins))
-      new AutonomousSwerveDriveCommand(bSupplier, drive, .5, .5, 0, 0.5, 0.1, 0.1, 0.1, spins),
-      new AutonomousSwerveDriveCommand(bSupplier, drive, -.5, 5, 0, 0.5, 0.1, 0.1, 0.1, spins),
-      new AutonomousSwerveDriveCommand(bSupplier, drive, -.5, -.5, 0, 0.5, 0.1, 0.1, 0.1, spins),
-      new AutonomousSwerveDriveCommand(bSupplier, drive, .5, -.5, 0, 0.5, 0.1, 0.1, 0.1, spins)
+      new AutonomousSwerveDriveCommand(bSupplier, drive, 0, 0, 0, 0.1, 0.1, 0.01, 0.1, spins,false),
+       new AutonomousSwerveDriveCommand(bSupplier, drive, -1, -1, 0, 0.5, 0.1, 0.01, 0.1, spins,true)
+      //new AutonomousSwerveDriveCommand(bSupplier, drive, -.5, 5, 0, 0.5, 0.1, 0.1, 0.1, spins),
+      //new AutonomousSwerveDriveCommand(bSupplier, drive, -.5, -.5, 0, 0.5, 0.1, 0.1, 0.1, spins),
+      //new AutonomousSwerveDriveCommand(bSupplier, drive, .5, -.5, 0, 0.5, 0.1, 0.1, 0.1, spins)
+
     
       );
     //new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, 1, 90, 1, 0.1, 0.1, 1, spins));
@@ -44,10 +47,10 @@ public final class Autos {
       BooleanSupplier bSupplier,
       ShooterSubsystem shooter, IntakeSubsystem intake,
       ArmSubsystem arm,
-      LimelightSub limelight) {
+      Limelight2Sub limelight) {
     return Commands.sequence(
-      new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 2, 2, 180, 0.5, 0.1, 0.1, 0.1, spins)),
-      new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, -1, -1, 270, 0.5, 0.1, 0.1, 0.1, spins)),
+      new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 2, 2, 180, 0.5, 0.1, 0.1, 0.1, spins,false)),
+      new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, -1, -1, 270, 0.5, 0.1, 0.1, 0.1, spins,false)),
       new RepeatCommand(new noteCollectionCmd(limelight, shooter, arm, intake, drive, 0, 0, 0)),
       new ShooterCommand(shooter, 0.1, intake),
       new RepeatCommand(new AprilTagAutoCmd(limelight, drive, arm)),
@@ -59,18 +62,18 @@ public final class Autos {
       BooleanSupplier bSupplier,
       ShooterSubsystem shooter, IntakeSubsystem intake,
       ArmSubsystem arm,
-      LimelightSub limelight) {
+      Limelight2Sub limelight) {
     return Commands.sequence(
-      new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 0, 1.5, -90, 0.5, 0.5, 0.1, 0.1, spins)),
-      new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, 1.5, -90, 0.5, 0.5, 0.1, 0.1, spins)),
+      new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 0, 1.5, -90, 0.5, 0.5, 0.1, 0.1, spins,false)),
+      new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, 1.5, -90, 0.5, 0.5, 0.1, 0.1, spins,false)),
       new RepeatCommand(new ArmPosCmd(arm, 0.35, 5.0)),
       new WaitCommand(1.0),
       new RepeatCommand(new ShooterCommand(shooter, -0.075, intake)),
       new WaitCommand(1.0),
       new RepeatCommand(new ShooterCommand(shooter, 0, intake)),
-      new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 0, 1.5, 0, 0.5, 0.5, 0.1, 0.1, spins)),
+      new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 0, 1.5, 0, 0.5, 0.5, 0.1, 0.1, spins,false)),
       new RepeatCommand(new noteCollectionCmd(limelight, shooter, arm, intake, drive, 0, 0.1, 0.1)),
-      new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, 1.5, -90, 0.5, 0.5, 0.1, 0.1, spins)),
+      new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, 1.5, -90, 0.5, 0.5, 0.1, 0.1, spins,false)),
       new RepeatCommand(new ArmPosCmd(arm, 0.35, 5.0)),
       new WaitCommand(1.0),
       new RepeatCommand(new ShooterCommand(shooter, -0.075, intake)),
@@ -83,15 +86,15 @@ public final class Autos {
       BooleanSupplier bSupplier,
       ShooterSubsystem shooter, IntakeSubsystem intake,
       ArmSubsystem arm,
-      LimelightSub limelight) {
+      Limelight2Sub limelight) {
         return Commands.sequence(
           new WaitCommand(1.0),
           new RepeatCommand(new ShooterCommand(shooter, -0.75, intake)),
           new WaitCommand(1.0),
           new RepeatCommand(new ShooterCommand(shooter, 0, intake)),
-          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 0, 0, 180, 0.5, 0.5, 0.1, 0.1, spins)),
+          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 0, 0, 180, 0.5, 0.5, 0.1, 0.1, spins,false)),
           new RepeatCommand(new noteCollectionCmd(limelight, shooter, arm, intake, drive, 0, 0.1, 0.1)),
-          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 0, 0, 0, 0.5, 0.5, 0.1, 0.1, spins)),
+          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 0, 0, 0, 0.5, 0.5, 0.1, 0.1, spins,false)),
           new WaitCommand(1.0),
           new RepeatCommand(new ShooterCommand(shooter, -0.75, intake)),
           new WaitCommand(1.0),
@@ -103,16 +106,16 @@ public final class Autos {
       BooleanSupplier bSupplier,
       ShooterSubsystem shooter, IntakeSubsystem intake,
       ArmSubsystem arm,
-      LimelightSub limelight) {
+      Limelight2Sub limelight) {
         return Commands.sequence(
-          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, 0, 135, 0.5, 0.5, 0.1, 0.1, spins)),
+          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, 0, 135, 0.5, 0.5, 0.1, 0.1, spins,false)),
           new WaitCommand(1.0),
           new RepeatCommand(new ShooterCommand(shooter, -0.75, intake)),
           new WaitCommand(1.0),
           new RepeatCommand(new ShooterCommand(shooter, 0, intake)),
-          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, 0, 0, 0.5, 0.5, 0.1, 0.1, spins)),
+          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, 0, 0, 0.5, 0.5, 0.1, 0.1, spins,false)),
           new RepeatCommand(new noteCollectionCmd(limelight, shooter, arm, intake, drive, 0, 0.1, 0.1)),
-          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, 0, 135, 0.5, 0.5, 0.1, 0.1, spins)),
+          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, 0, 135, 0.5, 0.5, 0.1, 0.1, spins,false)),
           new WaitCommand(1.0),
           new RepeatCommand(new ShooterCommand(shooter, -0.75, intake)),
           new WaitCommand(1.0),
@@ -124,18 +127,18 @@ public final class Autos {
       BooleanSupplier bSupplier,
       ShooterSubsystem shooter, IntakeSubsystem intake,
       ArmSubsystem arm,
-      LimelightSub limelight) {
+      Limelight2Sub limelight) {
         return Commands.sequence(
-          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 0, -1.5, 90, -0.5, -0.5, -0.1, -0.1, spins)),
-          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, -1.5, 90, -0.5, -0.5, -0.1, -0.1, spins)),
+          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 0, -1.5, 90, -0.5, -0.5, -0.1, -0.1, spins,false)),
+          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, -1.5, 90, -0.5, -0.5, -0.1, -0.1, spins,false)),
           new RepeatCommand(new ArmPosCmd(arm, 0.35, 5.0)),
           new WaitCommand(1.0),
           new RepeatCommand(new ShooterCommand(shooter, -0.075, intake)),
           new WaitCommand(1.0),
           new RepeatCommand(new ShooterCommand(shooter, 0, intake)),
-          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 0, -1.5, 0, -0.5, -0.5, -0.1, -0.1, spins)),
+          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 0, -1.5, 0, -0.5, -0.5, -0.1, -0.1, spins,false)),
           new RepeatCommand(new noteCollectionCmd(limelight, shooter, arm, intake, drive, 0, 0.1, 0.1)),
-          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, -1.5, 90, -0.5, -0.5, -0.1, -0.1, spins)),
+          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, -1.5, 90, -0.5, -0.5, -0.1, -0.1, spins,false)),
           new RepeatCommand(new ArmPosCmd(arm, 0.35, 5.0)),
           new WaitCommand(1.0),
           new RepeatCommand(new ShooterCommand(shooter, -0.075, intake)),
@@ -148,15 +151,15 @@ public final class Autos {
       BooleanSupplier bSupplier,
       ShooterSubsystem shooter, IntakeSubsystem intake,
       ArmSubsystem arm,
-      LimelightSub limelight) {
+      Limelight2Sub limelight) {
         return Commands.sequence(
           new WaitCommand(1.0),
           new RepeatCommand(new ShooterCommand(shooter, -0.75, intake)),
           new WaitCommand(1.0),
           new RepeatCommand(new ShooterCommand(shooter, 0, intake)),
-          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 0, 0, -180, -0.5, -0.5, -0.1, -0.1, spins)),
+          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 0, 0, -180, -0.5, -0.5, -0.1, -0.1, spins,false)),
           new RepeatCommand(new noteCollectionCmd(limelight, shooter, arm, intake, drive, 0, 0.1, 0.1)),
-          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 0, 0, 0, -0.5, -0.5, -0.1, -0.1, spins)),
+          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 0, 0, 0, -0.5, -0.5, -0.1, -0.1, spins,false)),
           new WaitCommand(1.0),
           new RepeatCommand(new ShooterCommand(shooter, -0.75, intake)),
           new WaitCommand(1.0),
@@ -168,16 +171,16 @@ public final class Autos {
       BooleanSupplier bSupplier,
       ShooterSubsystem shooter, IntakeSubsystem intake,
       ArmSubsystem arm,
-      LimelightSub limelight) {
+      Limelight2Sub limelight) {
         return Commands.sequence(
-          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, 0, -135, -0.5, -0.5, -0.1, -0.1, spins)),
+          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, 0, -135, -0.5, -0.5, -0.1, -0.1, spins,false)),
           new WaitCommand(1.0),
           new RepeatCommand(new ShooterCommand(shooter, -0.75, intake)),
           new WaitCommand(1.0),
           new RepeatCommand(new ShooterCommand(shooter, 0, intake)),
-          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, 0, 0, -0.5, -0.5, -0.1, -0.1, spins)),
+          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, 0, 0, -0.5, -0.5, -0.1, -0.1, spins,false)),
           new RepeatCommand(new noteCollectionCmd(limelight, shooter, arm, intake, drive, 0, 0.1, 0.1)),
-          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, 0, -135, -0.5, -0.5, -0.1, -0.1, spins)),
+          new RepeatCommand(new AutonomousSwerveDriveCommand(bSupplier, drive, 1, 0, -135, -0.5, -0.5, -0.1, -0.1, spins,false)),
           new WaitCommand(1.0),
           new RepeatCommand(new ShooterCommand(shooter, -0.75, intake)),
           new WaitCommand(1.0),

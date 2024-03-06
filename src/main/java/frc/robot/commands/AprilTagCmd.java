@@ -32,7 +32,6 @@ public class AprilTagCmd extends Command {
    // set zero when robot starts 
 @Override
 public void initialize(){
-  m_LimelightSub.switchPipeline(0);
     if(reset == true){
         m_ArmSubsystem.setzero();
         }

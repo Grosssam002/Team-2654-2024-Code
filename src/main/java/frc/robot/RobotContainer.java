@@ -42,6 +42,7 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.commands.ManuelArmCmd;
 import frc.robot.commands.ManuelArmCommand2;
 import frc.robot.commands.ManuelShooterCmd;
+import frc.robot.subsystems.Limelight2Sub;
 
 public class RobotContainer {
   // Subsystem defined here
@@ -51,6 +52,7 @@ public class RobotContainer {
   private final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
   private final ArmSubsystem m_ArmSubsystem = new ArmSubsystem();
   private final LimelightSub m_LimelightSub = new LimelightSub();
+  private final Limelight2Sub m_Limelight2Sub = new Limelight2Sub();
   private final Pigeon m_Pigeon = new Pigeon();
   private final LEDS m_Leds = new LEDS();
   private final HookMotorSubsystem m_HookMotorSubsystem = new HookMotorSubsystem();
@@ -142,13 +144,13 @@ public class RobotContainer {
 private void configureAutochooser() {
   Command DefaultAuto = Autos.exampleAuto(m_exampleSubsystem);
   Command autoCommand1 = Autos.auto1(drivetrain, m_Pigeon, () -> fieldCentric);
-  Command autoCommand2 = Autos.auto2(drivetrain, m_Pigeon, () -> fieldCentric, m_ShooterSubsystem, m_IntakeMotor, m_ArmSubsystem, m_LimelightSub);
-  Command RedRightAuto = Autos.RedRightAuto(drivetrain, m_Pigeon, () -> fieldCentric, m_ShooterSubsystem, m_IntakeMotor, m_ArmSubsystem, m_LimelightSub);
-  Command RedCenterAuto = Autos.RedCenterAuto(drivetrain, m_Pigeon, () -> fieldCentric, m_ShooterSubsystem, m_IntakeMotor, m_ArmSubsystem, m_LimelightSub);
-  Command RedLeftAuto = Autos.RedLeftAuto(drivetrain, m_Pigeon, () -> fieldCentric, m_ShooterSubsystem, m_IntakeMotor, m_ArmSubsystem, m_LimelightSub);
-  Command BlueRightAuto = Autos.BlueRightAuto(drivetrain, m_Pigeon, () -> fieldCentric, m_ShooterSubsystem, m_IntakeMotor, m_ArmSubsystem, m_LimelightSub);
-  Command BlueCenterAuto = Autos.BlueCenterAuto(drivetrain, m_Pigeon, () -> fieldCentric, m_ShooterSubsystem, m_IntakeMotor, m_ArmSubsystem, m_LimelightSub);
-  Command BlueLeftAuto = Autos.BlueLeftAuto(drivetrain, m_Pigeon, () -> fieldCentric, m_ShooterSubsystem, m_IntakeMotor, m_ArmSubsystem, m_LimelightSub);
+  Command autoCommand2 = Autos.auto2(drivetrain, m_Pigeon, () -> fieldCentric, m_ShooterSubsystem, m_IntakeMotor, m_ArmSubsystem, m_Limelight2Sub);
+  Command RedRightAuto = Autos.RedRightAuto(drivetrain, m_Pigeon, () -> fieldCentric, m_ShooterSubsystem, m_IntakeMotor, m_ArmSubsystem, m_Limelight2Sub);
+  Command RedCenterAuto = Autos.RedCenterAuto(drivetrain, m_Pigeon, () -> fieldCentric, m_ShooterSubsystem, m_IntakeMotor, m_ArmSubsystem, m_Limelight2Sub);
+  Command RedLeftAuto = Autos.RedLeftAuto(drivetrain, m_Pigeon, () -> fieldCentric, m_ShooterSubsystem, m_IntakeMotor, m_ArmSubsystem, m_Limelight2Sub);
+  Command BlueRightAuto = Autos.BlueRightAuto(drivetrain, m_Pigeon, () -> fieldCentric, m_ShooterSubsystem, m_IntakeMotor, m_ArmSubsystem, m_Limelight2Sub);
+  Command BlueCenterAuto = Autos.BlueCenterAuto(drivetrain, m_Pigeon, () -> fieldCentric, m_ShooterSubsystem, m_IntakeMotor, m_ArmSubsystem, m_Limelight2Sub);
+  Command BlueLeftAuto = Autos.BlueLeftAuto(drivetrain, m_Pigeon, () -> fieldCentric, m_ShooterSubsystem, m_IntakeMotor, m_ArmSubsystem, m_Limelight2Sub);
 
   autoChooser.setDefaultOption("Default Auto Mode", DefaultAuto);
   autoChooser.addOption("Auto Mode 1", autoCommand1);

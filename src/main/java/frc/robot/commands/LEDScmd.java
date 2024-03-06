@@ -22,6 +22,6 @@ public class LEDScmd extends Command {
     }
     @Override
     public void end(boolean interrupted){
-        m_Leds.closeleds();
+       // m_Leds.closeleds();
     }
 }

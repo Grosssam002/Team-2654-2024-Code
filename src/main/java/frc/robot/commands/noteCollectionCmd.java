@@ -9,10 +9,11 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LimelightSub;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.Limelight2Sub;
 
 public class noteCollectionCmd extends Command {
     
-    private final LimelightSub m_LimelightSub;
+    private final Limelight2Sub m_Limelight2Sub;
     private final ShooterSubsystem m_ShooterSubsystem;
     private final ArmSubsystem m_ArmSubsystem;
     private final IntakeSubsystem m_IntakeMotor;
@@ -21,7 +22,7 @@ public class noteCollectionCmd extends Command {
     private double m_intakespeed;
     private double m_armspeed;
     
-    public noteCollectionCmd(LimelightSub c_LimelightSub, 
+    public noteCollectionCmd(Limelight2Sub c_Limelight2Sub, 
     ShooterSubsystem c_ShooterSubsystem, 
     ArmSubsystem c_ArmSubsystem, 
     IntakeSubsystem c_IntakeSubsystem, 
@@ -29,7 +30,7 @@ public class noteCollectionCmd extends Command {
     double c_drivespeed,
     double c_intakespeed,
     double c_armspeed) {
-        this.m_LimelightSub = c_LimelightSub;
+        this.m_Limelight2Sub = c_Limelight2Sub;
         this.m_ShooterSubsystem = c_ShooterSubsystem;
         this.m_ArmSubsystem = c_ArmSubsystem;
         this.m_IntakeMotor = c_IntakeSubsystem;
@@ -40,12 +41,12 @@ public class noteCollectionCmd extends Command {
     }
     @Override
     public void initialize() {
-        m_LimelightSub.switchPipeline(1);
+
     }
     @Override
     public void execute() {
     m_ArmSubsystem.drive_to_pos(0.0, 0.25);
-    double[] SpeakerAprilTag = m_LimelightSub.limelight();
+    double[] SpeakerAprilTag = m_Limelight2Sub.limelight();
     double x = SpeakerAprilTag[0];
     double y = SpeakerAprilTag[1];
         if(x <= -1) {

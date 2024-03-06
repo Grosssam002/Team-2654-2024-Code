@@ -7,20 +7,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.Drivetrain;
 import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.Limelight2Sub;
 
 public class AprilTagAutoCmd extends Command {
-    private final LimelightSub m_LimelightSub;
+    private final Limelight2Sub m_Limelight2Sub;
     private final DrivetrainSubsystem m_DrivetrainSubsystem;
     private final ArmSubsystem m_ArmSubsystem;
 
-    public AprilTagAutoCmd(LimelightSub c_LimelightSub, DrivetrainSubsystem c_DrivetrainSubsystem, ArmSubsystem c_ArmSubsystem){
+    public AprilTagAutoCmd(Limelight2Sub c_Limelight2Sub, DrivetrainSubsystem c_DrivetrainSubsystem, ArmSubsystem c_ArmSubsystem){
         this.m_DrivetrainSubsystem = c_DrivetrainSubsystem;
-        this.m_LimelightSub = c_LimelightSub;
+        this.m_Limelight2Sub = c_Limelight2Sub;
         this.m_ArmSubsystem = c_ArmSubsystem;
     }
     @Override
     public void execute() {
-        double[] AprilTagData = m_LimelightSub.limelight();
+        double[] AprilTagData = m_Limelight2Sub.limelight();
         double x = AprilTagData[0];
         double y = AprilTagData[1];
         double Tid = AprilTagData[3];
