@@ -7,6 +7,8 @@ package frc.robot.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 import com.team2052.swervemodule.*;
 
+import com.ctre.phoenix6.hardware.Pigeon2;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -39,7 +41,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         new Translation2d(-Constants.Drivetrain.DRIVETRAIN_TRACKWIDTH_METERS / 2.0, Constants.Drivetrain.DRIVETRAIN_WHEELBASE_METERS / 2.0)
     );
 
-    private final AHRS navx;
+    private final Pigeon2 pigeon;
     private Rotation2d navxOffset;
 
     private final SwerveDriveOdometry odometry;
@@ -76,7 +78,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
             new Rotation2d(Constants.Drivetrain.BACK_RIGHT_MODULE_STEER_OFFSET_RADIANS)
         );
 
-        navx = new AHRS(SPI.Port.kMXP, (byte) 200);
+        pigeon = new Pigeon2(9);
         navxOffset = new Rotation2d();
 
         zeroGyro();
@@ -89,7 +91,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
         field = new Field2d();
         
-        Shuffleboard.getTab("Odometry").add(navx);
+        Shuffleboard.getTab("Odometry").add(pigeon);
         Shuffleboard.getTab("Odometry").add(field);
     }
 
@@ -146,8 +148,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
         drive(0, 0, 0, false);
     }
 
-    public AHRS getNavx(){
-        return navx;
+    public Pigeon2 getPigeon(){
+        return pigeon;
     }
 
     public void xWheels() {
@@ -197,7 +199,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     public void zeroGyro() {
-        navx.reset();
+        pigeon.reset();
         navxOffset = new Rotation2d();
     }
 
@@ -210,7 +212,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     public Rotation2d getRotation() {
-       return navx.getRotation2d().rotateBy(navxOffset);
+       return pigeon.getRotation2d().rotateBy(navxOffset);
     }
 
     public static double getMaxVelocityMetersPerSecond() {

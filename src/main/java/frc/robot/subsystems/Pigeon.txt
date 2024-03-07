@@ -8,7 +8,7 @@ public class Pigeon extends SubsystemBase{
     Pigeon2 m_Pigeon = new Pigeon2(9, "rio");
     ADIS16470_IMU gyro = new ADIS16470_IMU();
 public double getangle(){
-    return m_Pigeon.getAngle();
+    return m_Pigeon.getAngle() % 360;
     
     
 

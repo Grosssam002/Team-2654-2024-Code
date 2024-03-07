@@ -9,8 +9,9 @@ import edu.wpi.first.units.Angle;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.DrivetrainSubsystem;
-import frc.robot.subsystems.Pigeon;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
+
 import java.lang.Math;
 
 
@@ -30,7 +31,6 @@ public class AutonomousSwerveDriveCommand extends Command {
     private final SlewRateLimiter xLimiter;
     private final SlewRateLimiter yLimiter;
     private final SlewRateLimiter rotationLimiter;
-    private final Pigeon spins;
 
     public AutonomousSwerveDriveCommand( 
         BooleanSupplier fieldCentricSupplier,
@@ -42,11 +42,9 @@ public class AutonomousSwerveDriveCommand extends Command {
         double driveSpeed,
         double distanceMargin,
         double rotationMargin,
-        Pigeon spins,
         boolean stop
         ) {
         this.drivetrain = drivetrain;
-        this.spins = spins;
         this.destinationX = destinationX;
         this.destinationY = destinationY;
         this.destinationAngle = destinationAngle;
@@ -61,7 +59,7 @@ public class AutonomousSwerveDriveCommand extends Command {
         yLimiter = new SlewRateLimiter(2);
         rotationLimiter = new SlewRateLimiter(5);
         
-        addRequirements(drivetrain, spins);
+        addRequirements(drivetrain);
     }
 
     @Override
@@ -87,14 +85,21 @@ public class AutonomousSwerveDriveCommand extends Command {
         double normalizedVectorY = vectorY / vectorMagnitude;
         SmartDashboard.putNumber("vectorx before", normalizedVectorX);
         SmartDashboard.putNumber("vectory before", normalizedVectorY);
-        double angleradians = -Math.toRadians(spins.getangle());
-        double rotatednormalizedVectorX = ((normalizedVectorX * Math.cos(angleradians)) - (normalizedVectorY* Math.sin(angleradians)));
-        double rotatednormalizedVectorY = -((normalizedVectorX * Math.sin(angleradians)) + (normalizedVectorY* Math.cos(angleradians)));
+        double currentAngle = drivetrain.getPosition().getRotation().getDegrees();
+        double rotatednormalizedVectorX = ((normalizedVectorX * Math.cos(currentAngle)) - (normalizedVectorY* Math.sin(currentAngle)));
+        double rotatednormalizedVectorY = -((normalizedVectorX * Math.sin(currentAngle)) + (normalizedVectorY* Math.cos(currentAngle)));
         SmartDashboard.putNumber("vectorx after", rotatednormalizedVectorX);
         SmartDashboard.putNumber("vectory after", rotatednormalizedVectorY);
+        double compensatedAngle = destinationAngle - currentAngle;
+
+        PIDController controller = new PIDController(0.1, 0, 0);
+        double calculatedSpeed = controller.calculate(currentAngle, destinationAngle);
+        controller.setTolerance(5);
+        controller.enableContinuousInput(0.0, 360.0);
+        
 
 
-        if((destinationAngle - spins.getangle() <= rotationMargin)){
+        if((compensatedAngle <= rotationMargin)){
             rotationSpeed = 0;
         }
 
@@ -102,6 +107,7 @@ public class AutonomousSwerveDriveCommand extends Command {
 
         if (vectorMagnitude >= distanceMargin){
             if(stop == false){
+                 //drivetrain.drive(rotatednormalizedVectorX * driveSpeed, -rotatednormalizedVectorY * driveSpeed, calculatedSpeed, fieldCentricSupplier.getAsBoolean());
                  drivetrain.drive(rotatednormalizedVectorX * driveSpeed, -rotatednormalizedVectorY * driveSpeed, 0, fieldCentricSupplier.getAsBoolean());
             }
             else{ drivetrain.drive(0,0, 0, fieldCentricSupplier.getAsBoolean());
@@ -116,7 +122,7 @@ public class AutonomousSwerveDriveCommand extends Command {
         SmartDashboard.putNumber("nav rotation x", drivetrain.getPosition().getX());
         SmartDashboard.putNumber("nav rotation y", drivetrain.getPosition().getY());
         SmartDashboard.putNumber("nav vector magnitude", vectorMagnitude);
-        SmartDashboard.putNumber("nav rotation angle", spins.getangle());
+        SmartDashboard.putNumber("nav rotation angle", drivetrain.getRotation().getDegrees());
         
                 
         if(vectorMagnitude <= distanceMargin) {

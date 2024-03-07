@@ -11,7 +11,6 @@ import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.DrivetrainSubsystem;
-import frc.robot.subsystems.Pigeon;
 import edu.wpi.first.math.MathUtil;
 import java.lang.Math;
 
@@ -27,7 +26,6 @@ public class DriveCommand extends Command {
     private final SlewRateLimiter xLimiter;
     private final SlewRateLimiter yLimiter;
     private final SlewRateLimiter rotationLimiter;
-    private final Pigeon spins;
 
     
 
@@ -42,11 +40,9 @@ public class DriveCommand extends Command {
         DoubleSupplier ySupplier, 
         DoubleSupplier rotationSupplier,
         BooleanSupplier fieldCentricSupplier,
-        DrivetrainSubsystem drivetrain,
-        Pigeon spins
+        DrivetrainSubsystem drivetrain
     ) {
         this.drivetrain = drivetrain;
-        this.spins = spins;
 
         this.xSupplier = xSupplier;
         this.ySupplier = ySupplier;
@@ -58,7 +54,7 @@ public class DriveCommand extends Command {
         yLimiter = new SlewRateLimiter(2);
         rotationLimiter = new SlewRateLimiter(5);
 
-        addRequirements(drivetrain, spins);
+        addRequirements(drivetrain);
     }
     protected double getRotateX(double jx,double jy,double pa) {
         double ja;
@@ -81,12 +77,12 @@ public class DriveCommand extends Command {
 
     protected double getX() {
         //return slewAxis(xLimiter, deadBand(-xSupplier.getAsDouble()));
-        return slewAxis(xLimiter, deadBand(getRotateX(-xSupplier.getAsDouble(),-ySupplier.getAsDouble(),spins.getangle())));
+        return slewAxis(xLimiter, deadBand(getRotateX(-xSupplier.getAsDouble(),-ySupplier.getAsDouble(), drivetrain.getRotation().getDegrees())));
     }
 
     protected double getY() {
        //return slewAxis(yLimiter, deadBand(-ySupplier.getAsDouble()));
-        return slewAxis(yLimiter, deadBand(getRotateY(-xSupplier.getAsDouble(),-ySupplier.getAsDouble(),spins.getangle())));
+        return slewAxis(yLimiter, deadBand(getRotateY(-xSupplier.getAsDouble(),-ySupplier.getAsDouble(),drivetrain.getRotation().getDegrees())));
     }
 
     protected double getRotation() {
@@ -99,7 +95,7 @@ public class DriveCommand extends Command {
         
         SmartDashboard.putNumber("nav rotation x", drivetrain.getPosition().getX());
         SmartDashboard.putNumber("nav rotation y", drivetrain.getPosition().getY());
-        SmartDashboard.putNumber("nav rotation angle", spins.getangle());
+        SmartDashboard.putNumber("nav rotation angle", drivetrain.getRotation().getDegrees());
     }
 
     @Override

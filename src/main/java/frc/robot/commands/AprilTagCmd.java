@@ -50,7 +50,7 @@ public void initialize(){
     double Tid = SpeakerAprilTag[3];
     //Working auto aim, the negative number is the angle, the more negative the umber the lower it is to the ground, works to about 6-8 feet from front of speaker
     //about 75% accuracy. The Y variable is the distance from the tag do not change those.
-    if(Tid == 8 ||Tid == 4 || Tid == 7){
+    if(Tid == 4 || Tid == 7){
         SmartDashboard.putNumber("Manuel Motor",m_ArmSubsystem.getPos());
         if(y >= 20){m_ArmSubsystem.drive_to_pos(60,0.3);}
         else if((y<20) && (y>=19)){m_ArmSubsystem.drive_to_pos(59, 0.3);}

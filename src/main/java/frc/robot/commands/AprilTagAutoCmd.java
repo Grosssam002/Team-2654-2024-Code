@@ -25,7 +25,7 @@ public class AprilTagAutoCmd extends Command {
         double x = AprilTagData[0];
         double y = AprilTagData[1];
         double Tid = AprilTagData[3];
-        if(Tid == 8) {
+        if(Tid == 4 || Tid == 7) {
             if (x < -0.1) {
                 m_DrivetrainSubsystem.drive(0, 0, 0.1, isFinished());
             }
